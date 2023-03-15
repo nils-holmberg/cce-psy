@@ -14,7 +14,10 @@
 - long term, short term
 - personality, conditional effects
 
+---
 
+- [internal repo](https://github.com/nils-holmberg/cce-psy)
+- [external website](https://nils-holmberg.github.io/cce-psy/)
 
 
 
