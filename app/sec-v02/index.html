@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Basic Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.03.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
+</head>
+<body>
+    <h1>Basic demo</h1>
+    <py-config src="./pyscript.toml"></py-config>
+    <py-script src="./main.py"></py-script>
+    
+    <!--REPL & write to output-->
+    <div id="replOutput"></div>
+    <py-repl output="replOutput">
+        hello = "Hello world!"
+        hello
+    </py-repl>
+
+    <!--pyscript print to output & show from file-->
+    <py-script>
+        print("Let's compute π:")
+        def compute_pi(n):
+            pi = 2
+            for i in range(1,n):
+                pi *= 4 * i ** 2 / (4 * i ** 2 - 1)
+            return pi
+
+        pi = compute_pi(100000)
+        s = f"π is approximately {pi:.3f}"
+        print(s)
+    </py-script>
+
+    <!--pyscript write to element-->
+    <b><p>Today is <u><label id='today'></label></u></p></b>
+    <br>
+    <div id="pi" class="alert alert-primary"></div>
+    <py-script>
+      import datetime as dt
+      Element('today').write(dt.date.today().strftime('%A %B %d, %Y'))
+
+      def compute_pi(n):
+          pi = 2
+          for i in range(1,n):
+              pi *= 4 * i ** 2 / (4 * i ** 2 - 1)
+          return pi
+
+      pi = compute_pi(100000)
+      Element('pi').write(f'π is approximately {pi:.3f}')
+    </py-script>
+
+    <!--Handling click events-->
+    <button py-click="current_time()" id="get-time" class="py-button">Get current time</button>
+    <p id="current-time"></p>
+
+    <py-script>
+      import datetime
+
+      def current_time():
+          now = datetime.datetime.now()
+
+          # Get paragraph element by id
+          paragraph = Element("current-time")
+
+          # Add current time to the paragraph element
+          paragraph.write(now.strftime("%Y-%m-%d %H:%M:%S"))
+    </py-script>
+
+    <!--Calling an API with requests-->
+    <py-script>
+        import requests
+        # https://github.com/koenvo/pyodide-http
+        import pyodide_http
+
+        # Patch the Requests library so it works with Pyscript
+        pyodide_http.patch_all()
+
+        # Make a request to the JSON Placeholder API
+        response = requests.get("https://jsonplaceholder.typicode.com/todos")
+        print(response.json())
+      </py-script>
+
+    <!--How to Pass Objects from PyScript to Javascript (and Vice Versa)-->
+    <!--JavaScript to PyScript-->
+    <script>
+        name = "Guido" //A JS variable
+
+        // Define a JS Function
+        function addTwoNumbers(x, y){
+            return x + y;
+        }
+    </script>
+    <py-script>
+        # Import and use JS function and variable into Python
+        from js import name, addTwoNumbers
+
+        print(f"Hello {name}")
+        print("Adding 1 and 2 in Javascript: " + str(addTwoNumbers(1, 2)))
+    </py-script>
+
+    <!--PyScript to JavaScript (Method 1: Using Pyodide’s globals access)-->
+    <py-script>x = 42</py-script>
+
+    <button onclick="showX()">Click Me to Get 'x' from Python</button>
+    <script>
+        function showX(){
+            console.log(`In Python right now, x = ${pyscript.interpreter.globals.get('x')}`)
+        }
+    </script>
+</body>
+</html>
+
+
+
