@@ -12,7 +12,7 @@
 - cognitive processes, process tracing
 - behavior (objective observations possible)
 - google analytics, website
-- long term, short term
+- long term, short term memory
 - personality, conditional effects
 
 ---
