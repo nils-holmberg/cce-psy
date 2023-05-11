@@ -8,7 +8,7 @@
 
 - [media multi-tasking](https://nils-holmberg.github.io/cce-psy/web/mmt/)
 - attitudes (self-reported, mostly)
-- knowledge, memory
+- knowledge, memory, awareness
 - cognitive processes, process tracing
 - behavior (objective observations possible)
 - google analytics, website, matomo
