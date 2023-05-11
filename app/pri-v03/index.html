@@ -8,107 +8,72 @@
     <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
 </head>
 <body>
-    <h1>Basic demo</h1>
+    <!--
     <py-config src="./pyscript.toml"></py-config>
     <py-script src="./main.py"></py-script>
-    
-    <!--REPL & write to output-->
-    <div id="replOutput"></div>
-    <py-repl output="replOutput">
-        hello = "Hello world!"
-        hello
-    </py-repl>
+    -->
 
-    <!--pyscript print to output & show from file-->
+    <div id="mpl"></div>
+    <div id="altair"></div>
+
+    <py-config>
+packages = [
+  "altair",
+  "pandas",
+  "vega_datasets",
+]
+
+[[fetch]]
+from = 'titta'
+files = ['__init__.py', 'Titta.py']
+to_folder = 'titta'
+    </py-config>
+
     <py-script>
-        print("Let's compute π:")
-        def compute_pi(n):
-            pi = 2
-            for i in range(1,n):
-                pi *= 4 * i ** 2 / (4 * i ** 2 - 1)
-            return pi
+import altair as alt
+from vega_datasets import data
+from titta import Titta, helpers_tobii as helpers
 
-        pi = compute_pi(100000)
-        s = f"π is approximately {pi:.3f}"
-        print(s)
+source = data.movies.url
+
+pts = alt.selection(type="single", encodings=['x'])
+
+rect = alt.Chart(data.movies.url).mark_rect().encode(
+    alt.X('IMDB_Rating:Q', bin=True),
+    alt.Y('Rotten_Tomatoes_Rating:Q', bin=True),
+    alt.Color('count()',
+        scale=alt.Scale(scheme='greenblue'),
+        legend=alt.Legend(title='Total Records')
+    )
+)
+
+circ = rect.mark_point().encode(
+    alt.ColorValue('grey'),
+    alt.Size('count()',
+        legend=alt.Legend(title='Records in Selection')
+    )
+).transform_filter(
+    pts
+)
+
+bar = alt.Chart(source).mark_bar().encode(
+    x='Major_Genre:N',
+    y='count()',
+    color=alt.condition(pts, alt.ColorValue("steelblue"), alt.ColorValue("grey"))
+).properties(
+    width=550,
+    height=200
+).add_selection(pts)
+
+display(alt.vconcat(
+    rect + circ,
+    bar
+).resolve_legend(
+    color="independent",
+    size="independent"
+), target="altair")
     </py-script>
 
-    <!--pyscript write to element-->
-    <b><p>Today is <u><label id='today'></label></u></p></b>
-    <br>
-    <div id="pi" class="alert alert-primary"></div>
-    <py-script>
-      import datetime as dt
-      Element('today').write(dt.date.today().strftime('%A %B %d, %Y'))
-
-      def compute_pi(n):
-          pi = 2
-          for i in range(1,n):
-              pi *= 4 * i ** 2 / (4 * i ** 2 - 1)
-          return pi
-
-      pi = compute_pi(100000)
-      Element('pi').write(f'π is approximately {pi:.3f}')
-    </py-script>
-
-    <!--Handling click events-->
-    <button py-click="current_time()" id="get-time" class="py-button">Get current time</button>
-    <p id="current-time"></p>
-
-    <py-script>
-      import datetime
-
-      def current_time():
-          now = datetime.datetime.now()
-
-          # Get paragraph element by id
-          paragraph = Element("current-time")
-
-          # Add current time to the paragraph element
-          paragraph.write(now.strftime("%Y-%m-%d %H:%M:%S"))
-    </py-script>
-
-    <!--Calling an API with requests-->
-    <py-script>
-        import requests
-        # https://github.com/koenvo/pyodide-http
-        import pyodide_http
-
-        # Patch the Requests library so it works with Pyscript
-        pyodide_http.patch_all()
-
-        # Make a request to the JSON Placeholder API
-        response = requests.get("https://jsonplaceholder.typicode.com/todos")
-        print(response.json())
-      </py-script>
-
-    <!--How to Pass Objects from PyScript to Javascript (and Vice Versa)-->
-    <!--JavaScript to PyScript-->
-    <script>
-        name = "Guido" //A JS variable
-
-        // Define a JS Function
-        function addTwoNumbers(x, y){
-            return x + y;
-        }
-    </script>
-    <py-script>
-        # Import and use JS function and variable into Python
-        from js import name, addTwoNumbers
-
-        print(f"Hello {name}")
-        print("Adding 1 and 2 in Javascript: " + str(addTwoNumbers(1, 2)))
-    </py-script>
-
-    <!--PyScript to JavaScript (Method 1: Using Pyodide’s globals access)-->
-    <py-script>x = 42</py-script>
-
-    <button onclick="showX()">Click Me to Get 'x' from Python</button>
-    <script>
-        function showX(){
-            console.log(`In Python right now, x = ${pyscript.interpreter.globals.get('x')}`)
-        }
-    </script>
 </body>
 </html>
 
