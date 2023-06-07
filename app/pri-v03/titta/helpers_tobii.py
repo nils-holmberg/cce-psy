@@ -4,7 +4,8 @@ Created on Tue Jun 06 16:20:36 2017
 
 @author: marcus
 """
-from psychopy import visual
+
+#from psychopy import visual
 import numpy as np
 import copy
 import warnings

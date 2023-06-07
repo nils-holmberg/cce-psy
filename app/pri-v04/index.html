@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>opencv</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.03.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
+</head>
+<body>
+    <!--
+    <py-config src="./pyscript.toml"></py-config>
+    <py-script src="./main.py"></py-script>
+    -->
+
+    <div id="mpl"></div>
+    <div id="altair"></div>
+
+    <py-config>
+packages = [
+  "opencv-python",
+  "pandas",
+  "matplotlib",
+]
+[[fetch]]
+from = 'img'
+files = ['some.jpg']
+to_folder = 'img'
+    </py-config>
+
+    <py-script>
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+image = cv2.imread('img/some.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+row, col = 1, 2
+fig, axs = plt.subplots(row, col, figsize=(20, 10))
+fig.tight_layout()
+ 
+axs[0].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+axs[0].set_title('Original')
+
+axs[1].imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+axs[1].set_title('Grayscale')
+
+#plt.show()
+#fig
+
+#cv2.imshow("test", imgb)
+#some = plt.imshow(imgb)
+display(fig, target="mpl")
+    </py-script>
+
+</body>
+</html>
+
+
+

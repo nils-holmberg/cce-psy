@@ -20,12 +20,12 @@
 packages = [
   "altair",
   "pandas",
-  "vega_datasets"
+  "vega_datasets",
 ]
 
 [[fetch]]
 from = 'titta'
-files = ['__init__.py', 'Titta.py']
+files = ['__init__.py', 'Titta.py', 'helpers_tobii.py', 'version.py']
 to_folder = 'titta'
     </py-config>
 
@@ -33,6 +33,7 @@ to_folder = 'titta'
 import altair as alt
 from vega_datasets import data
 from titta import Titta, helpers_tobii as helpers
+#from titta import Titta
 
 source = data.movies.url
 
