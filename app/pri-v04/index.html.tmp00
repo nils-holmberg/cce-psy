@@ -40,25 +40,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 from titta import Titta, helpers_tobii as helpers
 
-img_arr = np.zeros([360,640,3], dtype=np.uint8)
-img_arr[:,:,0] = np.ones([360,640])*128
-img_arr[:,:,1] = np.ones([360,640])*128
-img_arr[:,:,2] = np.ones([360,640])*128
-img_gray = img_arr.copy()
-img_cal = cv2.circle(img_arr, center=(320,180), radius=10, color=(0,0,0), thickness=8)
-
-row, col = 3, 3
+#image = cv2.imread('/content/cce-psy/app/pri-v04/img/some.jpg')
+image = cv2.imread('img/some.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+row, col = 1, 2
 fig, axs = plt.subplots(row, col, figsize=(10, 5))
 fig.tight_layout()
-for i, ax in enumerate(fig.axes):
-    ax.set_ylabel(str(i))
-    if i == 4:
-        ax.imshow(cv2.cvtColor(img_cal, cv2.COLOR_BGR2RGB))
-    else:
-        ax.imshow(cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB))
+ 
+axs[0].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+axs[0].set_title('Original')
+
+axs[1].imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+axs[1].set_title('Grayscale')
+
+#plt.show()
+#fig
+
+#cv2.imshow("test", imgb)
+#some = plt.imshow(imgb)
 display(fig, target="mpl")
 
-some = "Titta.__version__"
+some = Titta.__version__
 display(some, target="titta")
     </py-script>
 
