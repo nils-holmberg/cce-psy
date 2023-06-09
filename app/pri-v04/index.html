@@ -28,17 +28,13 @@ from = 'img'
 files = ['some.jpg']
 to_folder = 'img'
 
-[[fetch]]
-from = 'titta'
-files = ['__init__.py', 'Titta.py', 'helpers_tobii.py', 'version.py']
-to_folder = 'titta'
     </py-config>
 
     <py-script>
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from titta import Titta, helpers_tobii as helpers
+#from titta import Titta, helpers_tobii as helpers
 
 img_arr = np.zeros([360,640,3], dtype=np.uint8)
 img_arr[:,:,0] = np.ones([360,640])*128
