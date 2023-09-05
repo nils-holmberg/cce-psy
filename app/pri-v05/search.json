@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "destinations/destination-01.html",
+    "href": "destinations/destination-01.html",
+    "title": "destination-01",
+    "section": "",
+    "text": "test-cyan.png\n\n\n\n\n\n\n\ntest-magenta.png\n\n\n\n\n\n\n\n\n\ntest-yellow.png\n\n\n\n\n\n\n\ntest-black.png"
+  },
+  {
+    "objectID": "destinations/destination-01.html#destination-01",
+    "href": "destinations/destination-01.html#destination-01",
+    "title": "destination-01",
+    "section": "",
+    "text": "test-cyan.png\n\n\n\n\n\n\n\ntest-magenta.png\n\n\n\n\n\n\n\n\n\ntest-yellow.png\n\n\n\n\n\n\n\ntest-black.png"
+  },
+  {
+    "objectID": "destinations/index.html",
+    "href": "destinations/index.html",
+    "title": "destinations",
+    "section": "",
+    "text": "begin browsing our destinations"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "some",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  }
+]
