@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 66.666%; /* 2/3 of the horizontal space */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Space between grid elements */
+    margin: auto; /* Center the grid */
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+}
+
+.description {
+    text-align: left;
+    margin-top: 10px;
+}
