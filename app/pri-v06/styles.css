@@ -11,9 +11,9 @@ body {
 /* ------------------------------------ trial */
 
 .container {
-    width: 66.666%; /* 2/3 of the horizontal space */
+    width: 80%; /* 2/3 of the horizontal space */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3x2 grid */
     gap: 20px; /* Space between grid elements */
     margin: auto; /* Center the grid */
 }
@@ -35,7 +35,7 @@ body {
 }
 
 .grid-item img {
-    width: 100%;
+    width: 200px;
     height: auto;
 }
 
@@ -47,7 +47,7 @@ body {
 /* ------------------------------------ response */
 
 .form-container {
-    width: 66.666%; /* 2/3 of the horizontal space */
+    width: 80%; /* 2/3 of the horizontal space */
     margin: 20px auto 0 auto; /* Top aligned */
 }
 
