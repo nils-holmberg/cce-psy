@@ -5,13 +5,25 @@ padding: 20px;
 background-color: #f7f7f7;
 }
 
+#main-content {
+position: relative;
+}
+
+#main-content-bottom {
+position: absolute;
+bottom: 20px;
+}
+
 .chat-container {
 max-width: 800px;
-margin: 50px auto;
+width: 90%;
+margin: 0;
 background-color: #fff;
 border-radius: 10px;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 overflow: hidden;
+position: absolute;
+bottom: 20px;
 }
 
 .chat-header {
